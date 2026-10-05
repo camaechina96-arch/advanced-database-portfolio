@@ -1,7 +1,7 @@
 # MIT 8103 Advanced Database Systems Portfolio
 
 **Student Name:** AMAECHINA CHIJIOKE CHARLES  
-**Student ID:** 30171734
+**Student ID:** 30171734  
 **Course:** MIT 8103 Advanced Database Systems  
 **Academic Session:** 2026/2027 First Semester  
 **Assessment Type:** Individual Practical Database Portfolio  
@@ -13,6 +13,7 @@
 
 **Organisation:** University Library Management System  
 **Nature of Business:** A university library that lends books to students and staff, tracks loans, manages fines, and maintains a catalogue of books and members.  
+
 **Users of the Database:**
 - Librarians (manage books, members, and loans)
 - Students (borrow and return books)
@@ -39,8 +40,8 @@
 
 | Portfolio | Title | Marks | Status |
 |-----------|-------|-------|--------|
-| Portfolio 1 | Database Design and Modelling | 7 | 🟡 In Progress |
-| Portfolio 2 | Query Processing and Optimisation | 7 | ⚪ Not Started |
+| Portfolio 1 | Database Design and Modelling | 7 | ✅ Complete |
+| Portfolio 2 | Query Processing and Optimisation | 7 | 🟡 In Progress |
 | Portfolio 3 | Transactions and Concurrency | 7 | ⚪ Not Started |
 | Portfolio 4 | NoSQL and Advanced Data Models | 7 | ⚪ Not Started |
 | Portfolio 5 | Distributed and Cloud Database Exercise | 6 | ⚪ Not Started |
@@ -59,22 +60,24 @@
 | NoSQL DB | MongoDB 6.0 (Docker) | Document model for reviews |
 | Containerisation | Docker + Docker Compose | Cross-platform reproducibility |
 | Language | Python 3 | Concurrency simulation scripts |
-| Diagrams | Draw.io | ER diagrams and architecture |
+| Diagrams | dbdiagram.io / Draw.io | ER diagrams and architecture |
 
 ---
 
 ## How to Run This Project
 
 ### Prerequisites
+
 - Docker Desktop installed and running
 - VS Code with the following extensions:
   - SQLTools or PostgreSQL extension
   - MongoDB for VS Code
-  - Draw.io Integration
+  - Draw.io Integration (optional)
 
 ### Starting the Databases
 
 1. Open a terminal in the project root.
 2. Run:
+
    ```bash
    docker compose up -d
