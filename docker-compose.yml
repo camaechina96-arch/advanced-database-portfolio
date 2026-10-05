@@ -11,7 +11,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./portfolio-1-database-design:/docker-entrypoint-initdb.d
+      - ./portfolio-1-database-design:/docker-entrypoint-initdb.d/portfolio-1
+      - ./portfolio-2-query-optimisation:/docker-entrypoint-initdb.d/portfolio-2
+      - ./portfolio-3-transactions-concurrency:/docker-entrypoint-initdb.d/portfolio-3
+      - ./portfolio-4-nosql:/docker-entrypoint-initdb.d/portfolio-4
+      - ./portfolio-5-distributed-cloud:/docker-entrypoint-initdb.d/portfolio-5
     networks:
       - mit8103_network
 
