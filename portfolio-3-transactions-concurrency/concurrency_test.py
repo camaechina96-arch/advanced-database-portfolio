@@ -10,6 +10,11 @@ Date: 2026-10-05
 
 Note: Uses pg8000 (pure Python driver) instead of psycopg2 due to
       Windows Application Control policy blocking psycopg2 DLLs.
+
+Transaction handling with pg8000.native:
+    - Statements run in autocommit mode by default.
+    - To run an explicit transaction, execute "BEGIN" first,
+      then "COMMIT" or "ROLLBACK" as SQL statements.
 """
 
 import threading
@@ -31,17 +36,19 @@ def borrow_book(member_id, book_id, thread_name):
     """
     Simulates a member borrowing a book.
 
-    Uses SELECT ... FOR UPDATE to lock the book row, preventing
-    another transaction from modifying it until this transaction
-    commits or rolls back.
+    Uses SELECT ... FOR UPDATE inside an explicit transaction to lock
+    the book row, preventing another transaction from modifying it
+    until this transaction commits or rolls back.
     """
     print(f"[{thread_name}] Starting borrow for Member {member_id}, Book {book_id}")
     conn = None
     try:
         conn = pg8000.native.Connection(**DB_CONFIG)
-        conn.autocommit = False  # Explicit transaction control
 
-        # Step 1: Begin transaction and lock the book row
+        # Step 1: Begin an explicit transaction
+        conn.run("BEGIN")
+
+        # Step 2: Lock the book row with FOR UPDATE
         print(f"[{thread_name}] Acquiring lock on Book {book_id}...")
         result = conn.run(
             "SELECT book_id, available_copies FROM Books WHERE book_id = :book_id FOR UPDATE;",
@@ -50,7 +57,7 @@ def borrow_book(member_id, book_id, thread_name):
 
         if not result:
             print(f"[{thread_name}] ERROR: Book {book_id} not found.")
-            conn.rollback()
+            conn.run("ROLLBACK")
             return
 
         current_available = result[0][1]
@@ -59,19 +66,19 @@ def borrow_book(member_id, book_id, thread_name):
         # Simulate processing time (the librarian checking the member record)
         time.sleep(2)
 
-        # Step 2: Check availability
+        # Step 3: Check availability
         if current_available <= 0:
             print(f"[{thread_name}] No copies available - rolling back.")
-            conn.rollback()
+            conn.run("ROLLBACK")
             return
 
-        # Step 3: Decrement available copies
+        # Step 4: Decrement available copies
         conn.run(
             "UPDATE Books SET available_copies = available_copies - 1 WHERE book_id = :book_id;",
             book_id=book_id,
         )
 
-        # Step 4: Create a loan record
+        # Step 5: Create a loan record
         conn.run(
             """
             INSERT INTO Loans (book_id, member_id, loan_date, due_date, status)
@@ -81,15 +88,15 @@ def borrow_book(member_id, book_id, thread_name):
             member_id=member_id,
         )
 
-        # Step 5: Commit
-        conn.commit()
+        # Step 6: Commit the transaction
+        conn.run("COMMIT")
         print(f"[{thread_name}] COMMITTED - Member {member_id} borrowed Book {book_id}")
 
     except Exception as e:
         print(f"[{thread_name}] ERROR: {e}")
         if conn:
             try:
-                conn.rollback()
+                conn.run("ROLLBACK")
             except Exception:
                 pass
     finally:

@@ -41,9 +41,9 @@
 | Portfolio | Title | Marks | Status |
 |-----------|-------|-------|--------|
 | Portfolio 1 | Database Design and Modelling | 7 | ✅ Complete |
-| Portfolio 2 | Query Processing and Optimisation | 7 | 🟡 In Progress |
-| Portfolio 3 | Transactions and Concurrency | 7 | ⚪ Not Started |
-| Portfolio 4 | NoSQL and Advanced Data Models | 7 | ⚪ Not Started |
+| Portfolio 2 | Query Processing and Optimisation | 7 | ✅ Complete |
+| Portfolio 3 | Transactions and Concurrency | 7 | ✅ Complete |
+| Portfolio 4 | NoSQL and Advanced Data Models | 7 | 🟡 In Progress |
 | Portfolio 5 | Distributed and Cloud Database Exercise | 6 | ⚪ Not Started |
 | Final | Documentation and Technical Reflection | 6 | ⚪ Not Started |
 | **Total** | | **40** | |
@@ -60,7 +60,8 @@
 | NoSQL DB | MongoDB 6.0 (Docker) | Document model for reviews |
 | Containerisation | Docker + Docker Compose | Cross-platform reproducibility |
 | Language | Python 3 | Concurrency simulation scripts |
-| Diagrams | dbdiagram.io / Draw.io | ER diagrams and architecture |
+| Python Driver | pg8000 | Pure-Python PostgreSQL driver |
+| Diagrams | dbdiagram.io | ER diagrams |
 
 ---
 
@@ -69,15 +70,11 @@
 ### Prerequisites
 
 - Docker Desktop installed and running
-- VS Code with the following extensions:
-  - SQLTools or PostgreSQL extension
-  - MongoDB for VS Code
-  - Draw.io Integration (optional)
+- Python 3 installed
+- pg8000 installed (`pip install pg8000`)
 
 ### Starting the Databases
 
-1. Open a terminal in the project root.
-2. Run:
-
-   ```bash
-   docker compose up -d
+```bash
+docker compose up -d
+docker ps
