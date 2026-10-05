@@ -44,8 +44,8 @@
 | Portfolio 2 | Query Processing and Optimisation | 7 | ✅ Complete |
 | Portfolio 3 | Transactions and Concurrency | 7 | ✅ Complete |
 | Portfolio 4 | NoSQL and Advanced Data Models | 7 | ✅ Complete |
-| Portfolio 5 | Distributed and Cloud Database Exercise | 6 | 🟡 In Progress |
-| Final | Documentation and Technical Reflection | 6 | ⚪ Not Started |
+| Portfolio 5 | Distributed and Cloud Database Exercise | 6 | ✅ Complete |
+| Final | Documentation and Technical Reflection | 6 | 🟡 In Progress |
 | **Total** | | **40** | |
 
 ---
@@ -58,6 +58,7 @@
 | Version Control | Git + GitHub | Progressive commits and evidence |
 | Relational DB | PostgreSQL 15 (Docker) | SQL schema, queries, transactions |
 | NoSQL DB | MongoDB 6.0 (Docker) | Document model for reviews |
+| Cluster Image | bitnamilegacy/postgresql:15 | Primary-replica replication |
 | Containerisation | Docker + Docker Compose | Cross-platform reproducibility |
 | Language | Python 3 | Concurrency simulation scripts |
 | Python Driver | pg8000 | Pure-Python PostgreSQL driver |
@@ -73,7 +74,7 @@
 - Python 3 installed
 - pg8000 installed (`pip install pg8000`)
 
-### Starting the Databases
+### Starting the Databases (Portfolios 1-4)
 
 ```bash
 docker compose up -d

@@ -1,0 +1,52 @@
+services:
+  primary:
+    image: bitnamilegacy/postgresql:15
+    container_name: library_primary
+    restart: unless-stopped
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: adminpassword
+      POSTGRESQL_USERNAME: student
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_DATABASE: library_db
+      POSTGRESQL_REPLICATION_MODE: master
+      POSTGRESQL_REPLICATION_USER: replicator
+      POSTGRESQL_REPLICATION_PASSWORD: replicatorpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - primary_data:/bitnami/postgresql
+    networks:
+      - library_cluster
+
+  replica:
+    image: bitnamilegacy/postgresql:15
+    container_name: library_replica
+    restart: unless-stopped
+    depends_on:
+      - primary
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: adminpassword
+      POSTGRESQL_USERNAME: student
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_DATABASE: library_db
+      POSTGRESQL_REPLICATION_MODE: slave
+      POSTGRESQL_MASTER_HOST: primary
+      POSTGRESQL_MASTER_PORT_NUMBER: 5432
+      POSTGRESQL_REPLICATION_USER: replicator
+      POSTGRESQL_REPLICATION_PASSWORD: replicatorpass
+    ports:
+      - "5434:5432"
+    volumes:
+      - replica_data:/bitnami/postgresql
+    networks:
+      - library_cluster
+
+volumes:
+  primary_data:
+    driver: local
+  replica_data:
+    driver: local
+
+networks:
+  library_cluster:
+    driver: bridge
