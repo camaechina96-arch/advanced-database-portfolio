@@ -43,8 +43,8 @@
 | Portfolio 1 | Database Design and Modelling | 7 | ✅ Complete |
 | Portfolio 2 | Query Processing and Optimisation | 7 | ✅ Complete |
 | Portfolio 3 | Transactions and Concurrency | 7 | ✅ Complete |
-| Portfolio 4 | NoSQL and Advanced Data Models | 7 | 🟡 In Progress |
-| Portfolio 5 | Distributed and Cloud Database Exercise | 6 | ⚪ Not Started |
+| Portfolio 4 | NoSQL and Advanced Data Models | 7 | ✅ Complete |
+| Portfolio 5 | Distributed and Cloud Database Exercise | 6 | 🟡 In Progress |
 | Final | Documentation and Technical Reflection | 6 | ⚪ Not Started |
 | **Total** | | **40** | |
 
