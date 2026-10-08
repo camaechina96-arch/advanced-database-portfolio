@@ -169,7 +169,7 @@ searches (a slightly stale count is fine) but Consistency for borrowing (you
 cannot lend a book twice).
 
 AI Use Declaration
-Tool used: DeepSeek (OpenAI) — as a learning aid and reviewer.
+Tool used: ChatGPT (OpenAI) — as a learning aid and reviewer.
 
 What I used it for:
 
